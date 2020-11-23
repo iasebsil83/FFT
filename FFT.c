@@ -52,43 +52,51 @@ int graph_cnt = 0;
 // ====================== EVENTS ========================
 
 // ---- unused events ----
-void S2DE_timedExecution(){}
-void S2DE_keyPressed(char key){}
-void S2DE_mousePressed(int x,int y, int state){}
-void S2DE_mouseMoved(int x,int y){}
-void S2DE_reshape(int newWidth,int newHeight){}
+void S2DE_event(int event){
+	switch(event){
+		case S2DE_DISPLAY:
+			//white background
+			S2DE_setColor(255,255,255);
+			S2DE_rectangle(0,0, maxl,maxh, 1);
 
-// ---- display ----
-void S2DE_display(){
-	//white background
-	S2DE_setColor(255,255,255);
-	S2DE_rectangle(0,0, maxl,maxh, 1);
+			//black lines
+			S2DE_setColor(  0,  0,  0);
 
-	//black lines
-	S2DE_setColor(  0,  0,  0);
+			//fourrier spectrum
+			printf("Starting Fourrier spectrum...\n");
+			graph_freq = 0;
+			for(int x=0; x < maxl; x++){
+				//draw
+				S2DE_rectangle(
+					2*x, 0,
+					2*x+1, pow( abs(freq_amp[graph_freq])/GRAPH_DIV ,2)/500, 1
+				);
 
-	//fourrier spectrum
-	printf("Starting Fourrier spectrum...\n");
-	graph_freq = 0;
-	for(int x=0; x < maxl; x++){
-		//draw
-		S2DE_rectangle(
-			2*x, 0,
-			2*x+1, pow( abs(freq_amp[graph_freq])/GRAPH_DIV ,2)/500, 1
-		);
+				//evolution
+				graph_freq++;
+				graph_cnt++;
 
-		//evolution
-		graph_freq++;
-		graph_cnt++;
+				printf("%i\n", (int)( abs(freq_amp[graph_freq])/GRAPH_DIV ));
 
-		printf("%i\n", (int)( abs(freq_amp[graph_freq])/GRAPH_DIV ));
+				//limit
+				if(graph_freq > FREQ_MAX-FREQ_MIN)
+					break;
+			}
+			printf("%i values displayed staring from %i to %i\n", graph_cnt, FREQ_MIN, FREQ_MIN+graph_freq);
+			printf("Ending Fourrier spectrum !\n");
+		break;
 
-		//limit
-		if(graph_freq > FREQ_MAX-FREQ_MIN)
-			break;
+		case S2DE_KEYBOARD:
+		break;
+		case S2DE_MOUSECLICK:
+		break;
+		case S2DE_MOUSEMOVE:
+		break;
+		case S2DE_RESIZE:
+		break;
+		case S2DE_TIMER:
+		break;
 	}
-	printf("%i values displayed staring from %i to %i\n", graph_cnt, FREQ_MIN, FREQ_MIN+graph_freq);
-	printf("Ending Fourrier spectrum !\n");
 }
 
 

@@ -20,9 +20,9 @@
 
 // =================== DECLARATIONS =====================
 
-// ---- window ----
-const int maxl = 1800;
-const int maxh = 700;
+// ---- S2DE variables ----
+extern unsigned int S2DE_width;
+extern unsigned int S2DE_height;
 
 // ---- FFT constants ----
 #define FREQ_MIN 2600
@@ -57,7 +57,7 @@ void S2DE_event(int event){
 		case S2DE_DISPLAY:
 			//white background
 			S2DE_setColor(255,255,255);
-			S2DE_rectangle(0,0, maxl,maxh, 1);
+			S2DE_rectangle(0,0, S2DE_width,S2DE_height, 1);
 
 			//black lines
 			S2DE_setColor(  0,  0,  0);
@@ -65,7 +65,7 @@ void S2DE_event(int event){
 			//fourrier spectrum
 			printf("Starting Fourrier spectrum...\n");
 			graph_freq = 0;
-			for(int x=0; x < maxl; x++){
+			for(int x=0; x < S2DE_width; x++){
 				//draw
 				S2DE_rectangle(
 					2*x, 0,
@@ -129,10 +129,9 @@ int main(int argc, char **argv){
 	printf("Ending Fourrier transform !\n");
 
 	//init window
-	S2DE_init(argc,argv, "FFT - ShortBlackLizard.wav", maxl,maxh);
+	S2DE_init(argc,argv, "FFT - ShortBlackLizard.wav", 1800,700);
 
 	//start window
 	S2DE_start();
 	return EXIT_SUCCESS;
 }
-

@@ -82,7 +82,7 @@ void S2DE_event(int event){
 				if(graph_freq > FREQ_MAX-FREQ_MIN)
 					break;
 			}
-			printf("%i values displayed staring from %i to %i\n", graph_cnt, FREQ_MIN, FREQ_MIN+graph_freq);
+			printf("%i values displayed starting from %i to %i\n", graph_cnt, FREQ_MIN, FREQ_MIN+graph_freq);
 			printf("Ending Fourrier spectrum !\n");
 		break;
 

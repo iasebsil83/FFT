@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+
 //graphics
-#include "S2DE.h"
+#include "../lib/S2DE.h"
+
 //sound file info
 #include "data.c"
 
@@ -88,9 +90,9 @@ void S2DE_event(int event){
 
 		case S2DE_KEYBOARD:
 		break;
-		case S2DE_MOUSECLICK:
+		case S2DE_MOUSE_CLICK:
 		break;
-		case S2DE_MOUSEMOVE:
+		case S2DE_MOUSE_MOVE:
 		break;
 		case S2DE_RESIZE:
 		break;
@@ -114,6 +116,7 @@ void S2DE_event(int event){
 
 // ---- launch game ----
 int main(int argc, char **argv){
+
 	//fourier transform
 	printf("Starting Fourrier transform...\n");
 	for(int f=0; f < FREQ_MAX-FREQ_MIN; f++){

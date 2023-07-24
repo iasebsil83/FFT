@@ -30,14 +30,6 @@
 
 
 
-
-
-
-
-
-
-
-
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ S2DE [0.1.6] ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                         Simple 2Dimensional Engine
 
@@ -111,17 +103,20 @@
     LICENCE :
 
     S2DE
-    Copyright (C) 2020  Sebastien SILVANO
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    any later version.
-    This program is distributed in the hope that it will be useful,
+    Copyright (C) 2020 Sebastien SILVANO
+
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 2.1 of the License, or (at your option) any later version.
+
+    This library is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-    You should have received a copy of the GNU General Public License
-    along with this program.
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with this library.
 
     If not, see <https://www.gnu.org/licenses/>.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -137,15 +132,7 @@
 
 
 
-
-
-
-
-
-
-
-
-// ---------------- INITIALIZATION ----------------
+// ---------------- INITIALISATION ----------------
 
 //window
 static int S2DE_window               = -1;
@@ -170,14 +157,6 @@ unsigned int S2DE_height    = 0;
 
 //event handler
 extern void S2DE_event(int event);
-
-
-
-
-
-
-
-
 
 
 
@@ -304,14 +283,6 @@ static void S2DEL_reshape(int width,int height){
 
 
 
-
-
-
-
-
-
-
-
 // ---------------- UTILITIES ----------------
 
 //useful
@@ -355,6 +326,15 @@ void S2DE_triangle(float x1,float y1, float x2,float y2, float x3,float y3, int 
 			glVertex2f(x2,y2);
 			glVertex2f(x3,y3);
 		glEnd();
+
+		//GPU weakness : remove diagonals
+		float thickness;
+		glGetFloatv(GL_LINE_WIDTH, &thickness);
+		glLineWidth(1.f);
+		S2DE_line(x1,y1, x2,y2);
+		S2DE_line(x2,y2, x3,y3);
+		S2DE_line(x3,y3, x1,y1);
+		glLineWidth(thickness);
 	}else{
 		S2DE_line(x1,y1, x2,y2);
 		S2DE_line(x2,y2, x3,y3);
@@ -456,14 +436,6 @@ void S2DE_setTimer(int ms){
 	//set new timedExecution delay
 	S2DE_timedExecution_delay = ms;
 }
-
-
-
-
-
-
-
-
 
 
 

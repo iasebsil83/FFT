@@ -14,12 +14,6 @@
 
 
 
-
-
-
-
-
-
 // =================== DECLARATIONS =====================
 
 // ---- S2DE variables ----
@@ -39,12 +33,6 @@ extern unsigned int S2DE_height;
 float freq_amp[FREQ_MAX-FREQ_MIN];
 int graph_freq = 0;
 int graph_cnt = 0;
-
-
-
-
-
-
 
 
 
@@ -100,12 +88,6 @@ void S2DE_event(int event){
 		break;
 	}
 }
-
-
-
-
-
-
 
 
 
